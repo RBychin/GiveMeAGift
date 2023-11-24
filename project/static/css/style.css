@@ -79,10 +79,13 @@ a:active {
     margin-top: 50px;
     padding: 20px;
     display: flex;
+    flex-direction: row; /* Располагаем элементы горизонтально по умолчанию */
+    flex-wrap: wrap;
 }
 
 .content {
     flex: 1;
+    min-width: 350px;
 }
 
 .content-card {
@@ -103,6 +106,8 @@ a:active {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 20px;
     justify-content: center;
+    margin: 20px auto 7px auto;
+
 }
 
 .box-item {
@@ -138,9 +143,7 @@ a:active {
 
 .side-bar {
     padding-left: 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.44);
-    width: 25%;
-    min-width: 170px;
+    min-width: 150px;
 }
 
 .contact {
