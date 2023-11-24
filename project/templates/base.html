@@ -9,12 +9,11 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Document</title>
 </head>
-{% block header %}{% endblock %}
-  <body>
-  {% csrf_token %}
-
-<!--  {% include 'includes/header.html' %}-->
-  {% block content %}{% endblock %}
-
-  </body>
+<header>
+    {% include 'includes/header.html' %}
+</header>
+<body>
+    {% csrf_token %}
+    {% block content %}{% endblock %}
+</body>
 </html>

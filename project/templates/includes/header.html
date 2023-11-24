@@ -1,18 +1,27 @@
-<br>
-<ul>
-  <li>
-    <a aria-current="page" href="{% url 'event:event_list' %}">Главная</a>
-  </li>
-  _
-  <li>
-    <a href="#">Мои события</a>
-  </li>
-  _
-  <li>
-    <a href="#">Покупки</a>
-  </li>
-  _
-  <li>
-    <a href="{% url 'event:event_create' %}">Новое событие</a>
-  </li>
-</ul>
+<!--<ul>-->
+<!--  <li>-->
+<!--    <a aria-current="page" href="{% url 'event:event_list' %}">Главная</a>-->
+<!--  </li>-->
+<!--  _-->
+<!--  <li>-->
+<!--    <a href="#">Мои события</a>-->
+<!--  </li>-->
+<!--  _-->
+<!--  <li>-->
+<!--    <a href="#">Покупки</a>-->
+<!--  </li>-->
+<!--  _-->
+<!--  <li>-->
+<!--    <a href="{% url 'event:event_create' %}">Новое событие</a>-->
+<!--  </li>-->
+<!--</ul>-->
+
+<div class="nav-menu">
+    <div class="nav-item">
+        <a href="{% url 'event:event_list' %}">Главная</a>
+    </div>
+    <div class="nav-item">
+        <a href="{% url 'event:event_create' %}">Новое событие</a>
+    </div>
+    <div class="nav-item">Покупки</div>
+</div>

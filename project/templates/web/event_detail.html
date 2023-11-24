@@ -9,17 +9,16 @@
 
 
 
-{% block header %}
+{% block content %}
 {% thumbnail event.background "900x450" crop="center" upscale=True as im %}
-<header class="header" style="background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('{{ im.url }}'); background-size: cover;">
+<div class="event-top" style="background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('{{ im.url }}'); background-size: cover;">
 <!--  <img src={{ im.url }} alt="Image" class="img-fluid mx-auto d-block rounded-circle" style="width: 150px; height: 150px;">-->
   {% endthumbnail %}
 <!--    <img class="header-pic" src="https://ocdn.eu/pulscms-transforms/1/JypktkqTURBXy9hMmFjNTY3MDJhZjljYTNhNDM2MGRkOWFmNGM2Y2ZjMi5qcGVnkpUDAADNAoDNAWiTBc0EsM0Cdg" alt="logo">-->
-    <h1 class="header-title">{{ event.name }}</h1>
-    <p class="header-info">Состоится {{ event.date_start|date:'d E Y' }}</p>
-</header>
-{% endblock %}
-{% block content %}
+    <h1 class="event-title">{{ event.name }}</h1>
+    <p class="event-title-info">Состоится {{ event.date_start|date:'d E Y' }}</p>
+</div>
+
 <div class="contact">
     <span class="phone">+7 995 099 7987</span>
     <span class="phone">{{ request.user }}</span>
@@ -30,7 +29,7 @@
     <div class="content">
         <div class="content-card">
             <div class="content-title">Описание</div>
-            <p>{{ event.description }}</p>
+            <p>{{ event.description|linebreaksbr }}</p>
         </div>
 
         <div class="content-card">
