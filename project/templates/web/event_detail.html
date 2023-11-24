@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load humanize %}
+
+
+
+
+
+
+
+
+{% block header %}
+{% thumbnail event.background "900x450" crop="center" upscale=True as im %}
+<header class="header" style="background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('{{ im.url }}'); background-size: cover;">
+<!--  <img src={{ im.url }} alt="Image" class="img-fluid mx-auto d-block rounded-circle" style="width: 150px; height: 150px;">-->
+  {% endthumbnail %}
+<!--    <img class="header-pic" src="https://ocdn.eu/pulscms-transforms/1/JypktkqTURBXy9hMmFjNTY3MDJhZjljYTNhNDM2MGRkOWFmNGM2Y2ZjMi5qcGVnkpUDAADNAoDNAWiTBc0EsM0Cdg" alt="logo">-->
+    <h1 class="header-title">{{ event.name }}</h1>
+    <p class="header-info">Состоится {{ event.date_start|date:'d E Y' }}</p>
+</header>
+{% endblock %}
+{% block content %}
+<div class="contact">
+    <span class="phone">+7 995 099 7987</span>
+    <span class="phone">{{ request.user }}</span>
+    <span class="phone">r.bychine@gmail.com</span>
+</div>
+
+<section class="container">
+    <div class="content">
+        <div class="content-card">
+            <div class="content-title">Описание</div>
+            <p>{{ event.description }}</p>
+        </div>
+
+        <div class="content-card">
+            <div class="content-title">Выбери подарок</div>
+                <div class="box-table">
+
+                    {% for gift in event.gifts.all %}
+                    <div class="box-item">
+                        {% thumbnail gift.photo "170x200" crop="center" upscale=True as im %}
+                            <img class="box-image" src="{{ im.url }}">
+        <!--                <div class="box-item" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url('{{ im.url }}'); background-size: cover;">{{ gift.name }}</div>-->
+                        {% endthumbnail %}
+                        <div class="box-text">
+                            <p class="box-title text-center">{{ gift.name }}</p>
+                            <p>Цена: {{ gift.price|intcomma }} ₽</p>
+                            <p>Cсылка: <a href="#">ссылка</a> </p>
+                            <p class="text-center"><button>покупаю</button></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+        </div>
+    </div>
+    <div class="side-bar">
+        <div class="content-card">
+            <div class="content-title">Дата</div>
+            <p>{{ event.date_start|date:'d E Y' }}</p>
+            <p class="header-info"> Начало - {{ event.date_start|date:'H:i' }}</p>
+            <p class="header-info"> Конец - {{ event.date_end|date:'H:i' }}</p>
+        </div>
+        <div class="content-card">
+            <div class="content-title">Адрес</div>
+            <p>{{ event.address }}</p>
+        </div>
+        <div class="content-card">
+            <div class="content-title">Дресскод</div>
+            <p>{{ event.dresscode }}</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+{% endblock %}

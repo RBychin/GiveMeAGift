@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+
+{% for event in events.all %}
+
+<a class="card text-bg-dark" href="{% url 'event:main' event.pk %}">
+  {% thumbnail event.background "960x200" crop="center" upscale=True as im %}
+  <img src={{ im.url }} class="card-img" alt="Responsive image">
+  {% endthumbnail %}
+  <div class="card-img-overlay">
+    <h5 class="card-title"><u>{{ event.name }}</u></h5>
+    <p class="card-text text-end">{{ event.description|slice:':150' }}</p>
+    <p class="card-text text-end card-footer"><small>{{ event.date_start }}</small></p>
+  </div>
+</a>
+<br>
+
+{% endfor %}
+
+
+{% endblock %}
+
+

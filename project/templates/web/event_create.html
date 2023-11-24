@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block content %}
+
+<h3 class="text-center">{{ title }}</h3>
+
+{% load user_filter %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        {% for field in form %}
+          {% for error in field.errors %}
+            {{ error|escape }}
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          {{ error|escape }}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group row my-2">
+            <label for="{{ field.id_for_label }}" class="col-sm-3 col-form-label">
+              {{ field.label }}
+              {% if field.field.required %}
+                <span class="required text-danger">*</span>
+              {% endif %}
+            </label>
+            <div class="col-sm-9">
+              {{ field|addclass:'form-control form-control-sm' }}
+              {% if field.help_text %}
+                <small id="{{ field.id_for_label}}-help" class="form-text text-muted">
+                  {{ field.help_text|safe }}
+                </small>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+        <div class="text-center mt-3">
+          <button type="submit" class="btn btn-secondary btn-sm">
+            {% if is_edit == 'True' %}
+              Сохранить
+            {% else %}
+              Добавить
+            {% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
