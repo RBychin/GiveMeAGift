@@ -1,0 +1,14 @@
+<div class="content-card">
+  <div class="content-title">Дата</div>
+  <p>{{ event.date_start|date:'d E Y' }}</p>
+  <p class="header-info"> Начало - {{ event.date_start|date:'H:i' }}</p>
+  <p class="header-info"> Конец - {{ event.date_end|date:'H:i' }}</p>
+</div>
+<div class="content-card">
+  <div class="content-title">Адрес</div>
+  <p>{{ event.address }}</p>
+</div>
+  <div class="content-card">
+  <div class="content-title">Дресскод</div>
+  <p>{{ event.dresscode }}</p>
+</div>

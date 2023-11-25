@@ -1,0 +1,29 @@
+{% load thumbnail %}
+{% load humanize %}
+<div class="content-card">
+    <div class="content-title">Описание</div>
+    <p>{{ event.description|linebreaksbr }}</p>
+</div>
+
+<div class="content-card">
+    <div class="content-title">Выбери подарок</div>
+        <div class="box-table">
+
+            {% for gift in event.gifts.all %}
+            <div class="box-item">
+                {% thumbnail gift.photo "170x200" crop="center" upscale=True as im %}
+                    <img class="box-image" src="{{ im.url }}">
+                {% endthumbnail %}
+                <div class="box-text">
+                    <p class="box-title text-center">{{ gift.name }}</p>
+                    <p>Цена: {{ gift.price|intcomma }} ₽</p>
+                    <p>Cсылка: <a href="#">ссылка</a> </p>
+                    <p class="text-center"><button>покупаю</button></p>
+                </div>
+            </div>
+            {% endfor %}
+            {% if request.user == event.author %}
+            ADD A GIFT
+            {% endif %}
+        </div>
+</div>

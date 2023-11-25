@@ -21,46 +21,10 @@
 
 <section class="container card-background">
     <div class="content">
-        <div class="content-card">
-            <div class="content-title">Описание</div>
-            <p>{{ event.description|linebreaksbr }}</p>
-        </div>
-
-        <div class="content-card">
-            <div class="content-title">Выбери подарок</div>фывфывы
-                <div class="box-table">
-
-                    {% for gift in event.gifts.all %}
-                    <div class="box-item">
-                        {% thumbnail gift.photo "170x200" crop="center" upscale=True as im %}
-                            <img class="box-image" src="{{ im.url }}">
-                        {% endthumbnail %}
-                        <div class="box-text">
-                            <p class="box-title text-center">{{ gift.name }}</p>
-                            <p>Цена: {{ gift.price|intcomma }} ₽</p>
-                            <p>Cсылка: <a href="#">ссылка</a> </p>
-                            <p class="text-center"><button>покупаю</button></p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-        </div>
+        {% include 'web/includes/main_info.html' %}
     </div>
     <div class="side-bar">
-        <div class="content-card">
-            <div class="content-title">Дата</div>
-            <p>{{ event.date_start|date:'d E Y' }}</p>
-            <p class="header-info"> Начало - {{ event.date_start|date:'H:i' }}</p>
-            <p class="header-info"> Конец - {{ event.date_end|date:'H:i' }}</p>
-        </div>
-        <div class="content-card">
-            <div class="content-title">Адрес</div>
-            <p>{{ event.address }}</p>
-        </div>
-        <div class="content-card">
-            <div class="content-title">Дресскод</div>
-            <p>{{ event.dresscode }}</p>
-        </div>
+        {% include 'web/includes/side_bar.html' %}
     </div>
 </section>
 
