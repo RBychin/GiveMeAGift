@@ -1,9 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class Event(models.Model):
 
     class Meta:
+        ordering = ['-id']
         verbose_name = 'праздник'
         verbose_name_plural = 'праздники'
 
@@ -37,6 +42,11 @@ class Event(models.Model):
         verbose_name='дресс код',
         blank=True,
         default='Отсутствует'
+    )
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        related_name='events',
+        verbose_name='автор'
     )
 
     def __str__(self):
@@ -72,35 +82,3 @@ class Gift(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class WebConfig(models.Model):
-
-    class Meta:
-        verbose_name = 'настройку'
-        verbose_name_plural = 'настройки'
-
-    logo = models.ImageField(
-        upload_to='config/',
-        verbose_name='логотип'
-    )
-    site_name = models.CharField(
-        max_length=256,
-        verbose_name='название сайта'
-    )
-    pic_buy = models.ImageField(
-        upload_to='config/',
-        verbose_name='картинка для "я куплю"'
-    )
-    pic_bought = models.ImageField(
-        upload_to='config/',
-        verbose_name='картинка для "я купил"'
-    )
-    pic_arrow = models.ImageField(
-        upload_to='config/',
-        verbose_name='стрелка'
-    )
-    pic_new_gift = models.ImageField(
-        upload_to='config/',
-        verbose_name='картинка для "новый подарок"'
-    )

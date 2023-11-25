@@ -3,7 +3,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView
 
-from core.models import Event, Gift, WebConfig
+from core.models import Event
 from web.forms import EventForm, GiftForm
 
 
@@ -18,19 +18,15 @@ class EventDetail(DetailView):
     template_name = 'web/event_detail.html'
     context_object_name = 'event'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['config'] = WebConfig.objects.get(pk=1)
-        return context
 
-
-class HolidayCreate(CreateView):
+class EventCreate(CreateView):
     template_name = 'web/event_create.html'
     form_class = EventForm
     extra_context = {'title': 'Создание события'}
 
     def form_valid(self, form):
         obj = form.save(commit=False)
+        obj.author = self.request.user
         obj.save()
         return redirect('event:main', pk=obj.id)
 
